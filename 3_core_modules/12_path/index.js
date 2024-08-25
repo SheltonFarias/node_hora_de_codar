@@ -1,10 +1,10 @@
 /*
-Módulo path
+  Módulo path
 
-- Com o path conseguimos extrair diversas informações sobre caminhos e arquivos;
-- Este também é um Code Module;
-- Algumas infos possíveis são; nome do diretório, nome do arquivo. extensão do arquivo e etc;
-*/
+  - Com o path conseguimos extrair diversas informações sobre caminhos e arquivos;
+  - Este também é um Code Module;
+  - Algumas infos possíveis são; nome do diretório, nome do arquivo. extensão do arquivo e etc;
+  */
 
 import path from "path";
 

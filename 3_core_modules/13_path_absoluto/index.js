@@ -15,6 +15,6 @@ console.log(path.resolve("teste.txt"));
 const midfolder = "relatorios";
 const filename = "teste1.txt";
 
-const finalPath = path.join("/", "arquivos", midfolder, filename);
+const finalPath = path.join("/", "arquivos", midfolder, filename); // join faz a união de paths
 
 console.log(finalPath);
