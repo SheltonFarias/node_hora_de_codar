@@ -16,9 +16,37 @@ const app = express(); // esta executando o express
 const port = 3000;
 const basePath = path.join(__dirname, "templates");
 
+// ler o body
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
+app.use(express.json());
+
 app.get("/", (req, res) => {
   // a "/" e indicado como rota principal
   res.sendFile(`${basePath}/index.html`);
+});
+
+// app.get("/users/add", (req, res) => {
+//   res.sendFile(`${basePath}/userform.html`);
+// });
+
+app.get("/users/add", (req, res) => {
+  res.sendFile(`${basePath}/userform.html`);
+});
+
+app.post("/users/save", (req, res) => {
+  console.log(req.body);
+
+  const name = req.body.name;
+  const age = req.body.age;
+
+  console.log(`O nome do usuario é ${name} e ele tem ${age} anos`);
+
+  res.sendFile(`${basePath}/useform.html`);
 });
 
 app.get("/users/:id", (req, res) => {
@@ -33,9 +61,3 @@ app.get("/users/:id", (req, res) => {
 app.listen(port, () => {
   console.log(`servidor ON! http://localhost:${port}`);
 });
-
-app.get("/users/add", (req, res) => {
-  res.sendFile(`${basePath}/userform.html`);
-});
-
-app.post("/users/save", (req, res) => {});
