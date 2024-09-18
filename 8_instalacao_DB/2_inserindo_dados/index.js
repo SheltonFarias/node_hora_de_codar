@@ -30,7 +30,7 @@ app.post("/books/insertbook", (req, res) => {
 
   const sql = `INSERT INTO farias (title, pageqty) values ('${title}', '${pageqty}')`;
 
-  conn.query(sq, function (err) {
+  conn.query(sql, function (err) {
     if (err) {
       console.log(err);
     }
