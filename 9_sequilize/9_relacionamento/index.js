@@ -2,7 +2,8 @@ const express = require("express");
 const { create } = require("express-handlebars");
 const { Client } = require("pg");
 const conn = require("./db/conn");
-const { User } = require("./models/User");
+const User = require("./models/User");
+const Address = require("./models/Address");
 
 const app = express();
 
@@ -80,7 +81,8 @@ app.listen(3000, () => {
 
 // Uma promisse para conectar/criar as tabelas e rodar servidor local
 conn
-  .sync()
+  // .sync()
+  .sync({ force: true })
   .then(() => {
     app.listen(3000, () => {
       console.log("Servidor rodando em http://localhost:3000");

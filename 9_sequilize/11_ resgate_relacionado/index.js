@@ -2,7 +2,8 @@ const express = require("express");
 const { create } = require("express-handlebars");
 const { Client } = require("pg");
 const conn = require("./db/conn");
-const { User } = require("./models/User");
+const User = require("./models/User");
+const Address = require("./models/Address");
 
 const app = express();
 
@@ -44,9 +45,13 @@ app.post("/users/create", async (req, res) => {
 app.get("/users/:id", async (req, res) => {
   const id = req.params.id;
 
-  const user = await User.findOne({ raw: true, where: { id: id } });
+  try {
+    const user = await User.findOne({ include: Address, where: { id: id } });
 
-  res.render("userview", { user });
+    res.render("userview", { user: user.get({ plain: true }) });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.post("/users/delete/:id", async (req, res) => {
@@ -74,13 +79,36 @@ app.get("/", async (req, res) => {
   res.render("home", { users: users });
 });
 
-app.listen(3000, () => {
-  console.log("Servidor rodando em http://localhost:3000");
+app.post("/addres/create", async (req, res) => {
+  const UserId = req.body.UserId;
+  const street = req.body.street;
+  const number = req.body.number;
+  const city = req.body.city;
+
+  const address = {
+    UserId,
+    street,
+    number,
+    city,
+  };
+
+  await Address.create(address);
+
+  res.redirect("/");
+});
+
+app.post("/address/delete", async (req, res) => {
+  const id = req.body.id;
+
+  await Address.destroy({
+    where: { id: id },
+  });
 });
 
 // Uma promisse para conectar/criar as tabelas e rodar servidor local
 conn
-  .sync()
+  // .sync()
+  .sync({ force: true })
   .then(() => {
     app.listen(3000, () => {
       console.log("Servidor rodando em http://localhost:3000");
