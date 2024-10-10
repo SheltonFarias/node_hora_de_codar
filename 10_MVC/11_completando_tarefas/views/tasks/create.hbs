@@ -1,6 +1,5 @@
-<h1> Editando a tarefa: {{this.title}} </h1>
+<h1> criação de task </h1>
 <form action="/task/add" method="post">
-  <input type="hidden" name="id" value={{this.id}} />
   <div class="form-control">
     <label for="title "> Título: </label>
     <input type="text" name="title" placeholder="O que voce deseja fazer?" />
@@ -11,7 +10,7 @@
       name="description"
       placeholder="descreva a tarefa..."
       id=""
-    >{{this.description}}</textarea>
+    ></textarea>
   </div>
-  <input type="submit" value="Editar" />
+  <input type="submit" value="Criar" />
 </form>

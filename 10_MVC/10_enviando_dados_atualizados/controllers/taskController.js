@@ -34,6 +34,19 @@ class Taskcontroller {
     res.render("task/edit", { task });
   }
 
+  static async updateTaskPost(req, res) {
+    const id = req.body.id;
+
+    const task = {
+      title: req.body.title,
+      description: req.body.description,
+    };
+
+    await Task.update(task, { where: { id: id } });
+
+    res.redirect("/task");
+  }
+
   static async showTasks(req, res) {
     const tasks = await Task.findAll({ raw: true });
 
