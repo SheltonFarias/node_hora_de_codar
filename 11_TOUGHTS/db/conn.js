@@ -7,7 +7,7 @@ const sequelize = new Sequelize("toughts2", "root", "", {
 
 try {
   sequelize.authenticate();
-  console.log("coneção estabelecida");
+  console.log("conexão estabelecida");
 } catch (err) {
   console.log(`Não foi possivel conectar: ${err}`);
 }
